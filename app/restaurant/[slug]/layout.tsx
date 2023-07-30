@@ -1,4 +1,4 @@
-import Header from "../../components/restaurant/Header";
+import Header from "../../../components/restaurant/Header";
 
 export default function RestaurantLayout({
     children

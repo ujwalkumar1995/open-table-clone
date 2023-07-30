@@ -1,11 +1,10 @@
-import Header from "../../components/restaurant/Header";
-import RestaurantNavBar from "../../components/restaurant/RestaurantNavBar";
-import Title from "../../components/restaurant/Title";
-import Rating from "../../components/restaurant/Rating";
-import Description from "../../components/restaurant/Description";
-import Images from "../../components/restaurant/Images";
-import Reviews from "../../components/restaurant/Reviews";
-import ReservationCard from "../../components/restaurant/ReservationCard";
+import RestaurantNavBar from "../../../components/restaurant/RestaurantNavBar";
+import Title from "../../../components/restaurant/Title";
+import Rating from "../../../components/restaurant/Rating";
+import Description from "../../../components/restaurant/Description";
+import Images from "../../../components/restaurant/Images";
+import Reviews from "../../../components/restaurant/Reviews";
+import ReservationCard from "../../../components/restaurant/ReservationCard";
 
 export default function RestaurantDetails() {
     return (

@@ -1,5 +1,5 @@
-import Form from "../../components/reserve/Form"
-import Header from "../../components/reserve/Header"
+import Form from "../../../components/reserve/Form"
+import Header from "../../../components/reserve/Header"
 
 export default function Reserve(){
     return (

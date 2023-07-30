@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
-import Header from './components/home/Header';
-import RestaurantCard from './components/home/RestaurantCard';
+import Header from '../components/home/Header';
+import RestaurantCard from '../components/home/RestaurantCard';
 import { Metadata } from 'next'
  
 export const metadata: Metadata = {

@@ -27,7 +27,7 @@ const RestaurantCard = () => {
                   <p className='text-sm mt-1 font-bold'>Booked 3 times today</p>
                 </div>
               </Link>
-            </div>
+        </div>
     )
 }
 

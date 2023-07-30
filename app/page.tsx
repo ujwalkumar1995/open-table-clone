@@ -1,13 +1,13 @@
 import { Inter } from 'next/font/google'
 import Header from '../components/home/Header';
 import RestaurantCard from '../components/home/RestaurantCard';
-import { Metadata } from 'next'
- 
-export const metadata: Metadata = {
-  title: 'My Page Title',
-}
+import { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'OpenTable',
+}
 
 export default function Home() {
   return (

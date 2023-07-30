@@ -5,6 +5,11 @@ import Description from "../../../components/restaurant/Description";
 import Images from "../../../components/restaurant/Images";
 import Reviews from "../../../components/restaurant/Reviews";
 import ReservationCard from "../../../components/restaurant/ReservationCard";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Milestones Grill | OpenTable',
+}
 
 export default function RestaurantDetails() {
     return (

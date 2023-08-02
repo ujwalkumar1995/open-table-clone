@@ -1,15 +1,13 @@
-const Images = () => {
+const Images = ({images}: {images: string[]}) => {
   return (
     <div>
         <h1 className='font-bold text-3xl mt-10 mb-7 border-b pb-5'>
-            7 photos
+            {images.length} photo{images.length > 1  ? 's': ''}
         </h1>
         <div className='flex flex-wrap'>
-        <img src='https://resizer.otstatic.com/v2/photos/xlarge/5/26455600.webp' alt='' className='w-56 h-44 mr-1'></img>
-        <img src='https://resizer.otstatic.com/v2/photos/xlarge/6/42547904.webp' alt='' className='w-56 h-44 mr-1'></img>
-        <img src='https://resizer.otstatic.com/v2/photos/xlarge/5/42547913.webp' alt='' className='w-56 h-44 mr-1'></img>
-        <img src='https://resizer.otstatic.com/v2/photos/xlarge/2/42514824.webp' alt='' className='w-56 h-44 mr-1'></img>
-        <img src='https://resizer.otstatic.com/v2/photos/xlarge/2/42514827.webp' alt='' className='w-56 h-44 mr-1'></img>
+        {images.map((image: string) => {
+          return <img key={image} src='image' alt='' className='w-56 h-44 mr-1'></img>
+        })}
         </div>
     </div>
   )

@@ -2,7 +2,7 @@ import { Cuisine, Location, PRICE, PrismaClient } from "@prisma/client";
 import Link from "next/link";
 
 const prisma = new PrismaClient();
-interface SearchParams {
+export interface SearchParams {
     city?: string | undefined;
     cuisine?: string | undefined;
     price?: PRICE | undefined;

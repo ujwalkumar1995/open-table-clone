@@ -3,13 +3,40 @@ import Header from "../../components/search/Header";
 import RestaurantCard from "../../components/search/RestaurantCard";
 import SideBar from "../../components/search/SideBar";
 import { PRICE, PrismaClient } from "@prisma/client";
+import { SearchParams } from "../../components/search/SideBar";
 
 const prisma = new PrismaClient();
 export const metadata: Metadata = {
   title: 'Search Restaurants | OpenTable',
 }
 
-const fetchRestaurantsByCity = (city: string | undefined) => {
+const fetchRestaurantsByCity = (searchParams: SearchParams) => {
+  const where: any = {};
+
+  if (searchParams.city){
+    const location = {
+        name: {
+          equals: searchParams.city.toLowerCase()
+        }
+    }
+    where.location = location;
+  }
+
+  if (searchParams.cuisine){
+    const cuisine = {
+      name: {
+        equals: searchParams.cuisine.toLowerCase()
+      }
+    }
+    where.cuisine = cuisine;
+  }
+
+  if (searchParams.price){
+    const price = {
+        equals: searchParams.price
+    }
+    where.price = price;
+  }
   const selectFields = {
     id: true,
     name: true,
@@ -19,17 +46,9 @@ const fetchRestaurantsByCity = (city: string | undefined) => {
     cuisine: true,
     location: true,
   }
-  if (!city) {
-    return prisma.restaurant.findMany({select: selectFields});
-  }
+
   return prisma.restaurant.findMany({
-    where: {
-      location: {
-        name: {
-          equals: city.toLowerCase()
-        }
-      }
-    },
+    where,
     select: selectFields
   })
 }
@@ -44,7 +63,7 @@ const fetchCuisines = () => {
 }
 
 export default async function Search({searchParams}: {searchParams: {city?: string, cuisine?: string, price?: PRICE}}) {
-  const restaurants = await fetchRestaurantsByCity(searchParams.city);
+  const restaurants = await fetchRestaurantsByCity(searchParams);
   const locations = await fetchLocations();
   const cuisines = await fetchCuisines();
 

@@ -9,16 +9,18 @@ const SearchBar = () => {
     return (
         <div className='text-left text-lg py-3 m-auto flex justify-center'>
             <input 
-                className='rounded bg-white mr-3 p-2 w-[450px]' placeholder='State, city or town' 
+                className='rounded bg-white mr-3 p-2 w-[450px]' 
+                placeholder='State, city or town' 
                 value={location} 
                 onChange={(event) => setLocation(event.target.value)}
                 type='text'>
             </input>
-            <button className='bg-red-600 px-9 py-2 text-white rounded' onClick={() => {
-            if (location === 'Banana'){
+            <button className='bg-red-600 px-9 py-2 text-white rounded' onClick={(event) => {
+            if (location.trim().length === 0){
                 return ;
             }
-            router.push('/search');
+            router.push(`/search?city=${location}`);
+            setLocation('');
             }}>
             Let&apos;s go
             </button>

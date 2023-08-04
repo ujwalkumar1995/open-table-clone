@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AuthModal from "../home/AuthModal";
 
 const NavBar = () => {
     return (
@@ -6,10 +7,8 @@ const NavBar = () => {
           <Link href='/' className='font-bold text-grey-700 text-2xl'>OpenTable</Link>
           <div>
             <div className='flex'>
-              <button className='mr-3 bg-blue-400 text-white border p-1 px-4 rounded'>
-                Signin
-              </button>
-              <button className='border p-1 px-4 rounded'>Signup</button>
+              <AuthModal isSignin={true}/>
+              <AuthModal isSignin={false}/>
             </div>
           </div>
         </nav>

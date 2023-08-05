@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import validator from 'validator';
+import bcrypt from 'bcrypt';
+import * as jose from 'jose';
 
 const primsa = new PrismaClient();
 
@@ -64,6 +66,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).json({errorMessage: "Email is associated with another account"});
     }
 
-    return res.status(200).json({ name: "hello" });
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await primsa.user.create({
+      data: {
+        first_name: firstName,
+        last_name: lastName,
+        password: hashedPassword,
+        city: city,
+        phone: phone,
+        email: email
+      }
+    })
+
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET)
+    const algorithm = "HS256";
+    const token = await new jose.SignJWT({email: user.email})
+                  .setProtectedHeader({alg: algorithm})
+                  .setExpirationTime("24h")
+                  .sign(secret);
+
+    return res.status(200).json({token: token });
   }
 }

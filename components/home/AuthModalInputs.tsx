@@ -32,6 +32,7 @@ const AuthModalInputs = ({inputs, handleChangeInput, isSignin}: Props) => {
                     className='rounded border p-2 py-3 w-[49%]' 
                     placeholder='Last Name'
                     value={inputs.lastName}
+                    onChange={handleChangeInput}
                     name='lastName'
                 >
                 </input>
@@ -42,6 +43,7 @@ const AuthModalInputs = ({inputs, handleChangeInput, isSignin}: Props) => {
                 className='rounded border p-2 py-3 w-full' 
                 placeholder='Email'
                 value={inputs.email}
+                onChange={handleChangeInput}
                 name='email'
             >
             </input>
@@ -53,6 +55,7 @@ const AuthModalInputs = ({inputs, handleChangeInput, isSignin}: Props) => {
                     className='rounded border p-2 py-3 w-[49%]' 
                     placeholder='Phone'
                     value={inputs.phone}
+                    onChange={handleChangeInput}
                     name='phone'
                 >    
                 </input>
@@ -61,6 +64,7 @@ const AuthModalInputs = ({inputs, handleChangeInput, isSignin}: Props) => {
                     className='rounded border p-2 py-3 w-[49%]' 
                     placeholder='City'
                     value={inputs.city}
+                    onChange={handleChangeInput}
                     name='city'
                 >
                 </input>
@@ -71,6 +75,7 @@ const AuthModalInputs = ({inputs, handleChangeInput, isSignin}: Props) => {
                 className='rounded border p-2 py-3 w-full' 
                 placeholder='Password'
                 value={inputs.password}
+                onChange={handleChangeInput}
                 name='city'
             >
             </input>

@@ -76,7 +76,7 @@ const AuthModalInputs = ({inputs, handleChangeInput, isSignin}: Props) => {
                 placeholder='Password'
                 value={inputs.password}
                 onChange={handleChangeInput}
-                name='city'
+                name='password'
             >
             </input>
         </div>

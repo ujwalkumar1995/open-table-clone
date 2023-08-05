@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import NavBar from '../components/common/NavBar'
+import AuthContext from './contexts/AuthContext'
 
 export default function RootLayout({
     // Layouts must accept a children prop.
@@ -11,12 +12,14 @@ export default function RootLayout({
     return (
       <html lang="en">
         <body>
-          <main className='bg-gray-100 min-h-screen w-screen'>
-          <main className='max-w-7xl m-auto bg-white text-black'>
-          <NavBar/>
-            {children}
-          </main>
-          </main>
+          <AuthContext>
+            <main className='bg-gray-100 min-h-screen w-screen'>
+            <main className='max-w-7xl m-auto bg-white text-black'>
+            <NavBar/>
+              {children}
+            </main>
+            </main>
+          </AuthContext>
         </body>
       </html>
     )

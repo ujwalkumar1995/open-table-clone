@@ -17,6 +17,7 @@
     "@types/bcrypt": "^5.0.0",
     "@types/node": "20.4.5",
     "@types/react": "18.2.17",
+    "@types/react-datepicker": "^4.15.0",
     "@types/react-dom": "18.2.7",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
@@ -28,6 +29,7 @@
     "next": "^13.4.12",
     "prisma": "^4.8.1",
     "react": "18.2.0",
+    "react-datepicker": "^4.16.0",
     "react-dom": "18.2.0",
     "typescript": "5.1.6",
     "validator": "^13.11.0"

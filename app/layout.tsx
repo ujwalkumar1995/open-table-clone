@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import NavBar from '../components/common/NavBar'
 import AuthContext from './contexts/AuthContext'
+import 'react-datepicker/dist/react-datepicker.css'
 
 export default function RootLayout({
     // Layouts must accept a children prop.

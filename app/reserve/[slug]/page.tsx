@@ -1,9 +1,11 @@
-import { Metadata } from "next"
 import Form from "../../../components/reserve/Form"
 import Header from "../../../components/reserve/Header"
+import { convertSlugToTitle } from "../../../utilities/convertSlugToTitle"
 
-export const metadata: Metadata = {
-    title: 'Reserve at Milestones Grill | OpenTable',
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+    return {
+        title: `Reserve at ${convertSlugToTitle(params.slug)} | OpenTable`
+    }
 }
 
 export default function Reserve(){

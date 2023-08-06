@@ -1,7 +1,7 @@
-import { Metadata } from "next";
 import RestaurantNavBar from "../../../../components/restaurant/RestaurantNavBar";
 import Menu from "../../../../components/restaurant/menu/Menu";
 import { PrismaClient } from "@prisma/client";
+import { convertSlugToTitle } from "../../../../utilities/convertSlugToTitle";
 
 const prisma = new PrismaClient();
 
@@ -22,8 +22,11 @@ const fetchItems = async (slug: string) => {
     return restaurant;
 }
 
-export const metadata: Metadata = {
-    title: 'Menu of Milestones Grill | OpenTable',
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+console.log(params);
+    return {
+        title: `Menu of ${convertSlugToTitle(params.slug)} | OpenTable`
+    }
 }
 
 export default async function RestaurantMenu({params}: {params: {slug: string}}){

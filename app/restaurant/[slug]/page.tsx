@@ -8,6 +8,7 @@ import ReservationCard from "../../../components/restaurant/ReservationCard";
 import { Metadata } from "next";
 import { PrismaClient, Review } from "@prisma/client";
 import { notFound } from "next/navigation";
+import { convertSlugToTitle } from "../../../utilities/convertSlugToTitle";
 
 const prisma = new PrismaClient;
 
@@ -44,8 +45,10 @@ const fetchRestaurantBySlug = async (slug: string): Promise<Restaurant>  => {
   return restaurant;
 }
 
-export const metadata: Metadata = {
-  title: 'Milestones Grill | OpenTable',
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+	return {
+		title: `${convertSlugToTitle(params.slug)} | OpenTable`
+	}
 }
 
 export default async function RestaurantDetails({params}: {params: {slug: string}}) {

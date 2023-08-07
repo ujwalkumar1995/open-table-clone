@@ -23,7 +23,6 @@ const fetchItems = async (slug: string) => {
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-console.log(params);
     return {
         title: `Menu of ${convertSlugToTitle(params.slug)} | OpenTable`
     }

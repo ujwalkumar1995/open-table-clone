@@ -1,13 +1,22 @@
 'use client'
 import { useState } from 'react';
-import { partySize, times } from '../../data'
+import { partySize as partySizes, times } from '../../data'
 import Datepicker from 'react-datepicker'
+import useAvailabilities from '../../hooks/useAvailabilities';
+import { CircularProgress } from '@mui/material';
+import Link from 'next/link';
+import { Time, convertToDisplayTime } from '../../utilities/convertToDisplayTime';
 
-const ReservationCard = ({openTime, closeTime}: {openTime: string, closeTime: string}) => {
+const ReservationCard = ({openTime, closeTime, slug}: {openTime: string, closeTime: string, slug: string}) => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+    const {data, loading, error, fetchAvailabilities} = useAvailabilities();
+    const [time, setTime] = useState(openTime);
+    const [partySize, setPartySize] = useState(1);
+    const [day, setDay] = useState(new Date().toISOString().split("T")[0]);
 
     const handleChangeDate = (date: Date | null) => {
-        if (date){
+        if (date) {
+            setDay(date.toISOString().split("T")[0]);
             return setSelectedDate(date);
         }
         return setSelectedDate(null);
@@ -17,7 +26,6 @@ const ReservationCard = ({openTime, closeTime}: {openTime: string, closeTime: st
         const timesWithInWindow: typeof times = [];
 
         let isWithinWindow = false;
-        
         times.forEach(time => {
             if (time.time === openTime){
                 isWithinWindow = true;
@@ -29,8 +37,16 @@ const ReservationCard = ({openTime, closeTime}: {openTime: string, closeTime: st
                 isWithinWindow = false;
             }
         })
-
         return timesWithInWindow;
+    }
+
+    const handleClick = () => {
+        fetchAvailabilities({
+            slug,
+            day,
+            time,
+            partySize
+        })
     }
   return (
     <div className='fixed w-[15%] bg-white rounded p-3 shadow'>
@@ -41,8 +57,8 @@ const ReservationCard = ({openTime, closeTime}: {openTime: string, closeTime: st
         </div>
         <div className='my-3 flex flex-col'>
             <label htmlFor=''>Party size</label>
-            <select name='' className='py-3 border-b font-light' id=''>
-                {partySize.map(size => {
+            <select name='' value={partySize} onChange={(e) => setPartySize(parseInt(e.target.value))} className='py-3 border-b font-light' id=''>
+                {partySizes.map(size => {
                     return <option key={size.value} value={size.value}>{size.label}</option>
                 })}
             </select>
@@ -64,7 +80,7 @@ const ReservationCard = ({openTime, closeTime}: {openTime: string, closeTime: st
                 <label htmlFor=''>
                     Time
                 </label>
-                <select name='' id='' className='py-3 border-b font-light'>
+                <select name='' id='' onChange={(e) => setTime(e.target.value)} value={time} className='py-3 border-b font-light'>
                     {
                         filterTimesByRestaurantOpenWindow().map(time => 
                             <option key={time.time} value={time.time}>{time.displayTime}</option>
@@ -74,8 +90,34 @@ const ReservationCard = ({openTime, closeTime}: {openTime: string, closeTime: st
             </div>
         </div>
         <div className='mt-5'>
-            <button className='bg-red-600 rounded w-full px-4 text-white font-bold h-16'>Find a Time</button>
+            <button 
+                className='bg-red-600 rounded w-full px-4 text-white font-bold h-16'
+                onClick={handleClick}
+                >
+                {loading ? <CircularProgress color='inherit'/> : 'Find a Time'}
+            </button>
         </div>
+        {(data && data.length) ? 
+        <div className='mt-4'>
+            <p className='text-reg'>Select a time</p>
+            <div className='flex flex-wrap mt-2'>
+            {data.map((time) => {
+              return time.available ? (
+                <Link
+                  href={`/reserve/${slug}?date=${day}T${time.time}&partySize=${partySize}`}
+                  className="bg-red-600 cursor-pointer p-2 w-24 text-center text-white mb-3 rounded mr-3"
+                >
+                  <p className="text-sm font-bold">
+                    {convertToDisplayTime(time.time as Time)}
+                  </p>
+                </Link>
+              ) : (
+                <p className="bg-gray-300 p-2 w-24 mb-3 rounded mr-3"></p>
+              );
+            })}
+            </div>
+        </div> : 
+        null}
     </div>
   )
 }

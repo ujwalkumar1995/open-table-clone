@@ -9,7 +9,6 @@ import useAuth from "../../hooks/useAuth";
 const NavBar = () => {
   const { data, loading } = useContext(AuthenticationContext);
   const { signout } = useAuth();
-  console.log({data});
     return (
         <nav className='bg-white p-2 flex justify-between'>
           <Link href='/' className='font-bold text-grey-700 text-2xl'>OpenTable</Link>

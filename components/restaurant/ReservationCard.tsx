@@ -49,7 +49,7 @@ const ReservationCard = ({openTime, closeTime, slug}: {openTime: string, closeTi
         })
     }
   return (
-    <div className='fixed w-[15%] bg-white rounded p-3 shadow'>
+    <div className='bg-white rounded p-3 shadow'>
         <div className='text-center border-b pb-2 font-bold'>
         <h4 className='text-lg'>
             Make a reservation

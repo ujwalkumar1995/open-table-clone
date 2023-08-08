@@ -35,7 +35,7 @@ export default async function Reserve({params, searchParams}: {
         <div className='border-t h-screen'>
             <div className='py-9 w-3/5 m-auto'>
                 <Header image={restaurant.main_image} date={searchParams.date} partySize={searchParams.partySize} name={restaurant.name}/>
-                <Form/>
+                <Form slug={restaurant.slug} date={searchParams.date} partySize={searchParams.partySize}/>
             </div>
         </div>
     )
